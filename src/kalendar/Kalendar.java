@@ -51,12 +51,16 @@ public class Kalendar {
 			}
 		}
 		System.out.println();
+		Calendar cal = Calendar.getInstance();
+		Date date = new Date(godina-1900, mjesec-1,1);
+		cal.setTime(date);
+		System.out.println("\t" + cal.getTime());
 		input.close();
 	}
 	/** Metoda koja vraca pocetni dan unesenog mjeseca, unesene godine */
 	public static int pocetniDan(int mjesec, int godina) {
 		
-		int pocetni = 2;              // pocetni dan od 1.1.01 godine
+		int pocetni = 2;              // pocetni dan od 1.1.1800 godine
 		// formula za izracunavanje pocetnog dana za uneseni mjesec i godinu
 		return (daniGodina(mjesec, godina) + pocetni) % 7; // vraca pocetni dan za unesenu godinu i mjesec
 	}
@@ -65,7 +69,7 @@ public class Kalendar {
 		
 		int suma = 0;
 		
-		for(int i = 1800; i < godina; i++) { // petlja koja ide od 1 godine do unosa godine
+		for(int i = 1800; i < godina; i++) { // petlja koja ide od 1800 godine do unosa godine
 			if(prestupna(i)) {               // ako je godina prestupna
 				suma += 366;				 // sabira u ukupnu sumu 366
 			} else {                         // ako godina nije prestupna
