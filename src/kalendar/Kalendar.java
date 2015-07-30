@@ -102,19 +102,13 @@ public class Kalendar {
 		}
 	}
 	
-	/** Metod koji snima sve korisnike iz arrayliste u fajl 
+	/** Metod koji snima remainder-e iz arrayliste u fajl 
 	public void saveKorisnikToFile() {
 		
 		try {
 			File file = new File("kalendar.txt");         // za trazeni fajl
 			FileWriter writer = new FileWriter(file, false); // vrsimo upis u taj fajl
 			
-		for (Korisnik list: lista) {                     // za sve korisnike iz liste
-				writer.write(list.getId() + " ");        // upis imena i prezimena
-				writer.write(list.getPassword() + " ");  // upis passworda
-				writer.write(list.getBalance() + " \n"); // upis ukupnog stanja na racunu
-			}
-		    writer.close();
 		    } catch (IOException ex) {
 			System.out.println(ex.getMessage());
 		}
