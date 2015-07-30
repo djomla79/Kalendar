@@ -1,5 +1,7 @@
 package kalendar;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Kalendar {
@@ -54,16 +56,16 @@ public class Kalendar {
 	/** Metoda koja vraca pocetni dan unesenog mjeseca, unesene godine */
 	public static int pocetniDan(int mjesec, int godina) {
 		
-		final int POCETNI_DAN_1800 = 3;              // pocetni dan od 1.1.1800 godine
+		int pocetni = 2;              // pocetni dan od 1.1.01 godine
 		// formula za izracunavanje pocetnog dana za uneseni mjesec i godinu
-		return (daniGodina(mjesec, godina) + POCETNI_DAN_1800) % 7; // vraca pocetni dan za unesenu godinu i mjesec
+		return (daniGodina(mjesec, godina) + pocetni) % 7; // vraca pocetni dan za unesenu godinu i mjesec
 	}
 	/** Metoda koja vraca ukupno dana do unesenog broja godina */
 	public static int daniGodina(int mjesec, int godina) {
 		
 		int suma = 0;
 		
-		for(int i = 1800; i < godina; i++) { // petlja koja ide od 1800 do unosa godine
+		for(int i = 1800; i < godina; i++) { // petlja koja ide od 1 godine do unosa godine
 			if(prestupna(i)) {               // ako je godina prestupna
 				suma += 366;				 // sabira u ukupnu sumu 366
 			} else {                         // ako godina nije prestupna
