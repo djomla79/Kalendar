@@ -20,8 +20,9 @@ public class Kalendar {
 		
 		String [] dani = {"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"};
 		
-		System.out.print("Unesite mjesec i godinu: ");
+		System.out.print("Unesite mjesec (brojevima, Jan=1,...,Dec=12): ");
 		int mjesec = input.nextInt();            // unos mjeseca  
+		System.out.print("Unesite godinu: ");
 		int godina = input.nextInt();            // unos godine
 		
 		while(godina > 2015) {                   // dok se uslov ne ispuni petlja se 'vrti'
