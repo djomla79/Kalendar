@@ -32,19 +32,19 @@ public class Kalendar {
 		for(int i=0; i<mjeseci.length-1; i++) {  // petlja koja prolazi kroz niz sa mjesecima
 		}
 		System.out.println();
-		System.out.println("\t\t\t   " + mjeseci[mjesec-1] + " " + godina + "\t\t\t");
+		System.out.println("\t\t\t   " + mjeseci[mjesec-1] + " " + godina + "\t\t\t"); // ispis unesenog mjeseca i godine u konzolu
 		System.out.println("\t___________________________________________________");
-		for(int i=0; i<dani.length; i++) {
-			System.out.print("\t" + dani[i]);
+		for(int i=0; i<dani.length; i++) {       // petlja koja prolazi kroz string sa svim danima u sedmici
+			System.out.print("\t" + dani[i]);    // ispis svih dana u konzolu
 		}
 		int i = 0;
 		System.out.println();
-		for (i = 0; i < pocetniDan(mjesec, godina); i++) {
-			System.out.print("\t");
+		for (i = 0; i < pocetniDan(mjesec, godina); i++) {    // petlja koja ide od pocetka body-ja do pocetnog dana za uneseni mjesec i godinu
+			System.out.print("\t");                           // ispis praznih polja do pocetnog dana u body-ju kalendara
 		}
-		for (i = 1; i <= daniUMjesecu(mjesec, godina); i++) {
-			System.out.print("\t" + i);
-			if ((i + pocetniDan(mjesec, godina)) % 7 == 0) {
+		for (i = 1; i <= daniUMjesecu(mjesec, godina); i++) { // petlja koja prolazi kroz ukupan broj dana u mjesecu za unesenu godinu i mjesec
+			System.out.print("\t" + i);                       // printa prazna polja i dane (pocevsi od 1. u mjesecu)
+			if ((i + pocetniDan(mjesec, godina)) % 7 == 0) {  // kad printanje dana dodje do 7 (kraja sedmice) printa se u sledeci red
 			System.out.println();
 			}
 		}
