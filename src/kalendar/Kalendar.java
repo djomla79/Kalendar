@@ -1,36 +1,83 @@
 package kalendar;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Kalendar {
 
+	private static Scanner input;
+	private static Scanner input2;
+	
 	public static void main(String[] args) {
-		/*
-		 program koji trebamo napisati treba da pita korisnika da unese mjesec i
-		 godinu te da mu ispiše, kalendar za taj mjesec i tu godinu.
-		 Kada program ispiše dati mjesec korisniku na konzoli, program onda pita korisnika
-		 da li želi unijeti neki reminder za odreðeni dan ili želi vidjeti kalendar za neki drugi mjesec.
-		 Ukoliko korisnik želi neki podsjetnik/reminder/note za odreðeni dan, program treba da saèuva
-		 korisnikov unos i da ga prikaže pri sljedeæem pokretanju programa.
-		*/
 		
-		Scanner input = new Scanner(System.in);
-		// niz stringova sa svih 12 mjeseci u godini
-		String [] mjeseci = {"January", "February", "March", "April", "May", "Jun", "July", "August", "Septembar", "Oktombar", "Novembar", "Decembar"};
+		input = new Scanner(System.in);
 		
-		String [] dani = {"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"};
+		unosMjesecGodina();     // pozivanje metode za unos mjeseca i godine
 		
-		System.out.print("Unesite mjesec (brojevima, Jan=1,...,Dec=12): ");
-		int mjesec = input.nextInt();            // unos mjeseca  
-		System.out.print("Unesite godinu: ");
-		int godina = input.nextInt();            // unos godine
+		boolean isOn = true;
+		
+		do {  // petlja u kojoj vrsimo ispis menu za novi unos godine i mjeseca, podsjetnik i izlaz
+			System.out.println("\n\t1. Novi unos mjeseca i godine");
+			System.out.println("\t2. Podsjetnik/Remainder");
+			System.out.println("\t3. Izlaz\n");
+			System.out.print("\tUnesite jednu od opcija: ");
+		try {
+			int opcija = input.nextInt();     // unos opcije
+			while(opcija < 0 || opcija > 3) {
+				System.out.print("\tPogresan unos, unesite broj 1, 2 ili 3.");
+				opcija = input.nextInt();
+			}
+		switch(opcija) {
+		case 1:                              // opcija 1 za novi unos mjeseca i godine
+			System.out.println();
+			unosMjesecGodina();
+			break;
+		case 2:                              // opcija dva za podsjetnik
+			System.out.println("\tUnesite podsjetnik\n");
+			break;			
+		case 3:                              // opcija 3 za izlaz iz programa
+			System.out.println("\tHvala, dovidjenja!");
+			isOn = false;
+			System.exit(1);
+		}
+		} catch(NoSuchElementException e) {
+			System.out.println("\tPogresan unos, Unesite broj!");
+			input.nextLine();
+		}
+	 } while(isOn);                         // petlja se 'vrti' dok se uslov ne ispuni
+  }
+	/** Metoda za unos mjeseca i godine */
+	public static void unosMjesecGodina() {
+		
+		input2 = new Scanner(System.in);
+		boolean isOn = false;
+		
+	do {
+		try {
+		System.out.print("\tUnesite mjesec (brojevima, Jan=1,...,Dec=12): ");
+		int mjesec = input2.nextInt();            // unos mjeseca  
+		System.out.print("\tUnesite godinu: ");
+		int godina = input2.nextInt();            // unos godine
 		
 		while(godina > 2015) {                   // dok se uslov ne ispuni petlja se 'vrti'
-			System.out.print("Unesite godinu ponovo: ");
-			godina = input.nextInt();            // ponovni unos godine
+			System.out.print("\tUnesite godinu ponovo: ");
+			godina = input2.nextInt();            // ponovni unos godine
 		}
+		isOn = false;
+		ispisBody(mjesec, godina);
+		} catch(InputMismatchException e) {
+			System.out.println("\tPogresan unos, Unesite broj!");
+			input2.nextLine();
+		}
+	} while(isOn);
+	}
+	/** Metoda za ispis body-ja kalendara u konzolu */
+	public static void ispisBody(int mjesec, int godina) {
+
+		// niz stringova sa svih 12 mjeseci u godini
+		String [] mjeseci = {"January", "February", "March", "April", "May", "Jun", "July", "August", "Septembar", "Oktombar", "Novembar", "Decembar"};
+		String [] dani = {"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun"};
 		for(int i=0; i<mjeseci.length-1; i++) {  // petlja koja prolazi kroz niz sa mjesecima
 		}
 		System.out.println();
@@ -51,11 +98,6 @@ public class Kalendar {
 			}
 		}
 		System.out.println();
-		Calendar cal = Calendar.getInstance();
-		Date date = new Date(godina-1900, mjesec-1,1);
-		cal.setTime(date);
-		System.out.println("\t" + cal.getTime());
-		input.close();
 	}
 	/** Metoda koja vraca pocetni dan unesenog mjeseca, unesene godine */
 	public static int pocetniDan(int mjesec, int godina) {
