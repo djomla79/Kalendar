@@ -50,8 +50,6 @@ public class Calendar {
 			break;
 		case 2:
 			dodajPodsjetnik();            // druga opcija, pozivanje metode za unos novog podsjetnika
-			//System.out.println("\tHvala, dovidjenja!");
-			//isOn = false;
 			break;
 		case 3:
 			pregledPodsjetnika();         // treca opcija, za pregled zadnje unesenog podsjetnika
@@ -84,7 +82,7 @@ public class Calendar {
 		int godina = input.nextInt();            // unos godine
 		
 		isOn = false;
-		ispisBody(mjesec, godina);
+		ispisBody(mjesec, godina);               // poziv metode za ispis body kalendara za uneseni mjesec i godinu
 		} catch(InputMismatchException e) {
 			System.out.println("\tPogresan unos, Unesite broj!");
 			input.nextLine();
@@ -177,8 +175,9 @@ public class Calendar {
 	/** Metoda koja ispisuje podsjetnik iz arrayliste */
 	public static void pregledPodsjetnika() {
 		
-		for(String s: podsjetnik) {
-			System.out.println("\tPodsjetnik: " + s);  // ispis podsjetnika iz arrayliste
+		System.out.println("\tPodsjetnik: ");
+		for(int i=0; i< podsjetnik.size(); i++) {
+			System.out.println("\t" + podsjetnik.get(i));  // ispis podsjetnika iz arrayliste
 		}
 		
 	}
@@ -202,6 +201,7 @@ public class Calendar {
 	public static void dodajPodsjetnik(){
 			
 		input = new Scanner(System.in);
+		podsjetnik.clear();                          // brisanje starog podsjetnika iz arrayliste
 		System.out.print("\tUnesite podsjetnik: ");  // ispis texta u konzolu
 		podsjetnik.add(input.nextLine());            // ubacivanje novog texta u arraylistu
 			
